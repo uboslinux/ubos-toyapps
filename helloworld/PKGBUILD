@@ -1,0 +1,41 @@
+developer=http://indiebox.net/
+maintainer=${developer}
+pkgname=$(basename $(pwd))
+pkgver=0.3
+pkgrel=1
+pkgdesc="Hello World"
+arch=('any')
+url="http://indiebox.net/"
+license=('GPL')
+groups=()
+depends=()
+backup=()
+source=()
+options=('!strip')
+md5sums=('76ef522124a23e3d65fe65de00ae487a')
+_parameterize=$(cat <<END
+    s!##pkgname##!$pkgname!g;
+    s!##pkgdesc##!$pkgdesc!g;
+    s!##developer##!$_developer!g;
+    s!##maintainer##!$_maintainer!g;
+    s!##pkgver##!$pkgver!g;
+    s!##pkgrel##!$pkgrel!g;
+    s!##license##!$license!g;
+END
+)
+package() {
+# Manifest
+    mkdir -p $pkgdir/var/lib/indiebox/manifests
+    perl -pe "$_parameterize" $startdir/indiebox-manifest.json > $pkgdir/var/lib/indiebox/manifests/${pkgname}.json
+    chmod 0644 $pkgdir/var/lib/indiebox/manifests/${pkgname}.json
+
+# Icons
+    mkdir -p $pkgdir/srv/http/_appicons/$pkgname
+    install -m644 $startdir/appicons/{72x72,144x144}.png $pkgdir/srv/http/_appicons/$pkgname/
+    install -m644 $startdir/appicons/license.txt $pkgdir/srv/http/_appicons/$pkgname/
+    
+# Code
+    mkdir -p $pkgdir/usr/share/${pkgname}
+    install -m755 $startdir/index.php $pkgdir/usr/share/${pkgname}/
+    install -m644 $startdir/htaccess  $pkgdir/usr/share/${pkgname}/
+}
