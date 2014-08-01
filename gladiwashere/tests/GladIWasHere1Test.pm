@@ -31,19 +31,16 @@ use IndieBox::WebAppTest;
 my $TEST = new IndieBox::WebAppTest(
     appToTest   => 'gladiwashere',
     description => 'Tests whether anonymous guests can leave messages on the gladiwashere app.',
+    testContext => '/guestbook',
     checks      => [
             new IndieBox::WebAppTest::StateCheck(
                     name  => 'virgin',
                     check => sub {
                         my $c = shift;
                         
-                        my $response = $c->httpGetRelativeContext( '/' );
-                        unless( $response->{content} =~ /Glad-I-Was-Here Guestbook/ ) {
-                            $c->reportError( 'Wrong front page', $response->{content} );
-                        }
-                        if( $response->{content} =~ /This is a great site/ ) {
-                            $c->reportError( 'Guestbook entry still there', $response->{content} );
-                        }
+                        $c->getMustContain(    '/', 'Glad-I-Was-Here Guestbook', undef, 'Wrong front page' );
+                        $c->getMustNotContain( '/', 'This is a great site',      undef, 'Guestbook entry still there' );
+
                         return 1;
                     }
             ),
@@ -58,10 +55,9 @@ my $TEST = new IndieBox::WebAppTest(
                             'comment' => 'This is a great site!',
                             'submit'  => 'submit' };
 
-                        my $response = $c->httpPostRelativeContext( '/', $postData );
-                        unless( $response->{headers} =~ m!HTTP/1.1 200 OK! ) {
-                            $c->reportError( 'Guestbook entry failed to post', $response->{headers} );
-                        }
+                        my $response = $c->post( '/', $postData );
+                        $c->mustStatus( $response, 200, 'Guestbook entry failed to post' );
+
                         return 1;
                     }
             ),
@@ -70,10 +66,7 @@ my $TEST = new IndieBox::WebAppTest(
                     check => sub {
                         my $c = shift;
 
-                        my $response = $c->httpGetRelativeContext( '/' );
-                        unless( $response->{content} =~ /This is a great site/ ) {
-                            $c->reportError( 'Guestbook entry not posted', $response->{content} );
-                        }
+                        $c->getMustContain( '/', 'This is a great site', 200, 'Guestbook entry not posted' );
                         return 1;
                     }
             )
