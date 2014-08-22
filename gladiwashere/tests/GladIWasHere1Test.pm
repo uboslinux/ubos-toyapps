@@ -24,16 +24,16 @@ use warnings;
 
 package GladIWasHere1Test;
 
-use IndieBox::WebAppTest;
+use UBOS::WebAppTest;
 
 # The states and transitions for this test
 
-my $TEST = new IndieBox::WebAppTest(
+my $TEST = new UBOS::WebAppTest(
     appToTest   => 'gladiwashere',
     description => 'Tests whether anonymous guests can leave messages on the gladiwashere app.',
     testContext => '/guestbook',
     checks      => [
-            new IndieBox::WebAppTest::StateCheck(
+            new UBOS::WebAppTest::StateCheck(
                     name  => 'virgin',
                     check => sub {
                         my $c = shift;
@@ -44,7 +44,7 @@ my $TEST = new IndieBox::WebAppTest(
                         return 1;
                     }
             ),
-            new IndieBox::WebAppTest::StateTransition(
+            new UBOS::WebAppTest::StateTransition(
                     name       => 'post-comment',
                     transition => sub {
                         my $c = shift;
@@ -61,7 +61,7 @@ my $TEST = new IndieBox::WebAppTest(
                         return 1;
                     }
             ),
-            new IndieBox::WebAppTest::StateCheck(
+            new UBOS::WebAppTest::StateCheck(
                     name  => 'comment-posted',
                     check => sub {
                         my $c = shift;

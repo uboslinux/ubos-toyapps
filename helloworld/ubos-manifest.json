@@ -1,23 +1,6 @@
 {
     "type" : "app",
 
-    "info" : {
-        "package"         : "##pkgname##",
-        "name"            : "Hello World",
-        "tagline"         : "##pkgdesc##",
-        "description"     : "<p>Simplest-possible Indie Box application</p>",
-
-        "developer"       : "##developer##",
-        "maintainer"      : "##maintainer##",
-
-        "upstreamversion" : "##pkgver##",
-        "packageversion"  : "##pkgver##-##pkgrel##",
-
-        "licenses" : [
-            "##license##"
-        ]
-    },
-
     "roles" : {
         "apache2" : {
             "defaultcontext" : "/hello",

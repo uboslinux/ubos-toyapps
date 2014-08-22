@@ -44,7 +44,7 @@
  </head>
  <body>
   <h1>Glad-I-Was-Here Guestbook</h1>
-  <p>Example MySQL/PHP app for <a href="http://indieboxproject.org/">Indie Box</a>.</p>
+  <p>Example MySQL/PHP app for <a href="http://ubos.net/">UBOS</a>.</p>
 <?php
 $first = TRUE;
 while( $row = mysql_fetch_assoc( $query )) {

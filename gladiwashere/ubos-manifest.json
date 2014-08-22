@@ -1,23 +1,6 @@
 {
     "type" : "app",
 
-    "info" : {
-        "package"         : "##pkgname##",
-        "name"            : "Glad I Was Here",
-        "tagline"         : "##pkgdesc##",
-        "description"       : "<p>Allows website visitors to leave a comment on the site.</p>",
-
-        "developer"       : "##developer##",
-        "maintainer"      : "##maintainer##",
-
-        "upstreamversion" : "##pkgver##",
-        "packageversion"  : "##pkgver##-##pkgrel##",
-
-        "licenses" : [
-            "##license##"
-        ]
-    },
-
     "roles" : {
         "apache2" : {
             "defaultcontext" : "/guestbook",
