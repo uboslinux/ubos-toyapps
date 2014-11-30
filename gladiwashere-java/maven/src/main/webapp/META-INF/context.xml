@@ -1,0 +1,13 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/indie-gladiwashere-java">
+  <Resource auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="com.mysql.jdbc.Driver"
+            name="jdbc/maindb"
+            url="jdbc:mysql://localhost/gladiwashere-java"
+            username="specialuser"
+            password="specialpass"
+            maxActive="20"
+            maxIdle="10"
+            maxWait="-1"/>
+</Context>
