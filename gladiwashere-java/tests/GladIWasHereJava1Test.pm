@@ -1,12 +1,12 @@
 #!/usr/bin/perl
 #
-# Simple test for gladiwashere. Compare with test for
-# gladiwashere-java
+# Simple test for gladiwashere-java. Compare with test for
+# gladiwashere.
 #
 # This file is part of gladiwashere.
 # (C) 2012-2015 Indie Computing Corp.
 #
-# gladiwashere is free software: you can redistribute it and/or modify
+# gladiwashere-java is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
@@ -23,15 +23,15 @@
 use strict;
 use warnings;
 
-package GladIWasHere1Test;
+package GladIWasHereJava1Test;
 
 use UBOS::WebAppTest;
 
 # The states and transitions for this test
 
 my $TEST = new UBOS::WebAppTest(
-    appToTest   => 'gladiwashere',
-    description => 'Tests whether anonymous guests can leave messages on the gladiwashere app.',
+    appToTest   => 'gladiwashere-java',
+    description => 'Tests whether anonymous guests can leave messages on the gladiwashere-java app.',
     testContext => '/guestbook',
     checks      => [
             new UBOS::WebAppTest::StateCheck(
