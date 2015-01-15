@@ -2,13 +2,12 @@ developer="http://indiecomputing.com/"
 url="http://ubos.net/"
 maintainer=$developer
 pkgname=$(basename $(pwd))
-pkgver=0.4
-pkgrel=3
+pkgver=0.5
+pkgrel=1
 pkgdesc="Hello World"
 arch=('any')
 license=('GPL')
 options=('!strip')
-md5sums=('76ef522124a23e3d65fe65de00ae487a')
 
 package() {
 # Manifest
