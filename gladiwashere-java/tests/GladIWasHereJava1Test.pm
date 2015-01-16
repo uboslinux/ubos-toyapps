@@ -32,7 +32,6 @@ use UBOS::WebAppTest;
 my $TEST = new UBOS::WebAppTest(
     appToTest   => 'gladiwashere-java',
     description => 'Tests whether anonymous guests can leave messages on the gladiwashere-java app.',
-    testContext => '/guestbook',
     checks      => [
             new UBOS::WebAppTest::StateCheck(
                     name  => 'virgin',
