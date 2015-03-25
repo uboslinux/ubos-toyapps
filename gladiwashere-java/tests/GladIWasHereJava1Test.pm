@@ -37,7 +37,10 @@ my $TEST = new UBOS::WebAppTest(
                     name  => 'virgin',
                     check => sub {
                         my $c = shift;
-                        
+
+                        unless( $c->waitForReady( '/' )) {
+                            $c->error( 'Waiting for Tomcat to be ready timed out' );
+                        }
                         $c->getMustContain(    '/', 'Glad-I-Was-Here Guestbook', undef, 'Wrong front page' );
                         $c->getMustNotContain( '/', 'This is a great site',      undef, 'Guestbook entry still there' );
 
@@ -55,6 +58,10 @@ my $TEST = new UBOS::WebAppTest(
                             'comment' => 'This is a great site!',
                             'submit'  => 'submit' };
 
+                        unless( $c->waitForReady( '/' )) {
+                            $c->error( 'Waiting for Tomcat to be ready timed out' );
+                        }
+
                         my $response = $c->post( '/', $postData );
                         $c->mustStatus( $response, 200, 'Guestbook entry failed to post' );
 
@@ -66,6 +73,9 @@ my $TEST = new UBOS::WebAppTest(
                     check => sub {
                         my $c = shift;
 
+                        unless( $c->waitForReady( '/' )) {
+                            $c->error( 'Waiting for Tomcat to be ready timed out' );
+                        }
                         $c->getMustContain( '/', 'This is a great site', 200, 'Guestbook entry not posted' );
                         return 1;
                     }
