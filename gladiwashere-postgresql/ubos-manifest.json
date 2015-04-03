@@ -3,32 +3,38 @@
 
     "roles" : {
         "apache2" : {
-            "defaultcontext" : "/guestbook",
+            "defaultcontext" : "/guestbook-postgresql",
+            "depends" : [
+                "php",
+                "php-apache",
+                "php-pgsql"
+            ],
             "apache2modules" : [
-                "proxy",
-                "proxy_ajp"
+                "php5"
+            ],
+            "phpmodules" : [
+                "pgsql"
             ],
             "appconfigitems" : [
                 {
-                    "type" : "file",
-                    "name" : "${appconfig.apache2.appconfigfragmentfile}",
-                    "template"     : "tmpl/htaccess.tmpl",
-                    "templatelang" : "varsubst"
-                }
-            ]
-        },
-        "tomcat7" : {
-            "defaultcontext" : "/guestbook",
-            "appconfigitems" : [
+                    "type"         : "file",
+                    "name"         : "index.php",
+                    "source"       : "web/index.php",
+                },
                 {
                     "type"         : "file",
-                    "name"         : "${appconfig.tomcat7.contextfile}",
-                    "template"     : "tmpl/context.xml.tmpl",
+                    "name"         : "config.php",
+                    "template"     : "tmpl/config.php.tmpl",
                     "templatelang" : "varsubst"
+                },
+                {
+                    "type"         : "symlink",
+                    "name"         : "gladiwashere.php",
+                    "source"       : "web/gladiwashere.php"
                 }
             ]
         },
-        "mysql" : {
+        "postgresql" : {
             "appconfigitems" : [
                 {
                     "type"             : "database",
@@ -40,8 +46,8 @@
             ],
             "installers" : [
                 {
-                    "name"   : "maindb",
                     "type"   : "sqlscript",
+                    "name"   : "maindb",
                     "source" : "sql/create.sql"
                 }
             ]

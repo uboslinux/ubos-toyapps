@@ -6,8 +6,7 @@
             "defaultcontext" : "/guestbook",
             "depends" : [
                 "php",
-                "php-apache",
-                "php-gd"
+                "php-apache"
             ],
             "apache2modules" : [
                 "php5"
