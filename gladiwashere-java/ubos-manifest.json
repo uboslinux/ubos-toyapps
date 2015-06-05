@@ -17,12 +17,12 @@
                 }
             ]
         },
-        "tomcat7" : {
+        "tomcat8" : {
             "defaultcontext" : "/guestbook",
             "appconfigitems" : [
                 {
                     "type"         : "file",
-                    "name"         : "${appconfig.tomcat7.contextfile}",
+                    "name"         : "${appconfig.tomcat8.contextfile}",
                     "template"     : "tmpl/context.xml.tmpl",
                     "templatelang" : "varsubst"
                 }
