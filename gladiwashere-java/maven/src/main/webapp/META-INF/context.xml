@@ -1,5 +1,5 @@
  <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/indie-gladiwashere-java">
+<Context antiResourceLocking="true" path="/indie-gladiwashere-java">
   <Resource auth="Container"
             type="javax.sql.DataSource"
             driverClassName="com.mysql.jdbc.Driver"
