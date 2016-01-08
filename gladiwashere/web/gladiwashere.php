@@ -3,7 +3,7 @@
 # Program code for gladiwashere.
 #
 # This file is part of gladiwashere.
-# (C) 2012-2014 Indie Computing Corp.
+# (C) 2012-2016 Indie Computing Corp.
 #
 # gladiwashere is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,23 +19,20 @@
 # along with gladiwashere.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-    $db = mysql_connect( $dbServer, $dbUser, $dbPass );
+    $db = mysqli_connect( $dbServer, $dbUser, $dbPass, $dbName );
     if( !$db ) {
-        die( 'ERROR: Cannot connect: ' . mysql_error() );
-    }
-    if( !mysql_select_db( $dbName, $db )) {
-        die( 'Error: Cannot select database ' . $dbName );
+        die( 'ERROR: Cannot connect: ' . mysqli_error() );
     }
     if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-        mysql_query(
+        mysqli_query(
                 sprintf(
                         "INSERT INTO Comment( name, created, email, comment ) VALUES ( '%s', NOW(), '%s', '%s' );",
-                        mysql_real_escape_string( $_POST['name'] ),
-                        mysql_real_escape_string( $_POST['email'] ),
-                        mysql_real_escape_string( $_POST['comment'] )),
+                        mysqli_real_escape_string( $_POST['name'] ),
+                        mysqli_real_escape_string( $_POST['email'] ),
+                        mysqli_real_escape_string( $_POST['comment'] )),
                 $db );
     }
-    $query = mysql_query( "SELECT * FROM Comment ORDER BY id DESC LIMIT 10", $db );
+    $query = mysqli_query( "SELECT * FROM Comment ORDER BY id DESC LIMIT 10", $db );
 
 ?>
 <html>
@@ -47,7 +44,7 @@
   <p>Example MySQL/PHP app for <a href="http://ubos.net/">UBOS</a>.</p>
 <?php
 $first = TRUE;
-while( $row = mysql_fetch_assoc( $query )) {
+while( $row = mysqli_fetch_assoc( $query )) {
     if( $first ) {
         echo "<h2>Comments:</h2>\n";
         echo "<dl>\n";
@@ -59,7 +56,7 @@ while( $row = mysql_fetch_assoc( $query )) {
 if( !$first ) {
     echo "</dl>\n";
 }
-mysql_close( $db );
+mysqli_close( $db );
 ?>
   <p>Please leave your comments here:</p>
   <form method="POST" action="<?php $_SERVER['PHP_SELF'] ?>">
