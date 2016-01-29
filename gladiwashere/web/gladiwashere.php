@@ -25,14 +25,14 @@
     }
     if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
         mysqli_query(
+                $db,
                 sprintf(
                         "INSERT INTO Comment( name, created, email, comment ) VALUES ( '%s', NOW(), '%s', '%s' );",
-                        mysqli_real_escape_string( $_POST['name'] ),
-                        mysqli_real_escape_string( $_POST['email'] ),
-                        mysqli_real_escape_string( $_POST['comment'] )),
-                $db );
+                        mysqli_real_escape_string( $db, $_POST['name'] ),
+                        mysqli_real_escape_string( $db, $_POST['email'] ),
+                        mysqli_real_escape_string( $db, $_POST['comment'] )));
     }
-    $query = mysqli_query( "SELECT * FROM Comment ORDER BY id DESC LIMIT 10", $db );
+    $query = mysqli_query( $db, "SELECT * FROM Comment ORDER BY id DESC LIMIT 10" );
 
 ?>
 <html>
@@ -44,7 +44,7 @@
   <p>Example MySQL/PHP app for <a href="http://ubos.net/">UBOS</a>.</p>
 <?php
 $first = TRUE;
-while( $row = mysqli_fetch_assoc( $query )) {
+while( $row = mysqli_fetch_assoc( $db, $query )) {
     if( $first ) {
         echo "<h2>Comments:</h2>\n";
         echo "<dl>\n";
