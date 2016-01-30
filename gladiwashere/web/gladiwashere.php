@@ -44,7 +44,7 @@
   <p>Example MySQL/PHP app for <a href="http://ubos.net/">UBOS</a>.</p>
 <?php
 $first = TRUE;
-while( $row = mysqli_fetch_assoc( $db, $query )) {
+while( $row = mysqli_fetch_assoc( $query )) {
     if( $first ) {
         echo "<h2>Comments:</h2>\n";
         echo "<dl>\n";
