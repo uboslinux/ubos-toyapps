@@ -3,7 +3,7 @@ url="http://ubos.net/"
 maintainer=${developer}
 pkgname=$(basename $(pwd))
 pkgver=0.5
-pkgrel=1
+pkgrel=2
 pkgdesc="Best Guestbook Evar, in Java this time"
 arch=('any')
 makedepends=('maven')
@@ -13,7 +13,7 @@ options=('!strip')
 prepare() {
     cd ${startdir}/maven
     sed -e "s/PKGBUILD_VERSION/${pkgver}/" pom.xml > pom-with-version.xml
-    mvn clean install -f pom-with-version.xml
+    mvn clean install -f pom-with-version.xml ${MVN_OPTS}
 }
 
 package() {
