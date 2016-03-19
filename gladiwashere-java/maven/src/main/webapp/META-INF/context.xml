@@ -1,10 +1,27 @@
- <?xml version="1.0" encoding="UTF-8"?>
-<Context antiResourceLocking="true" path="/indie-gladiwashere-java">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This context.xml file is only used if you run this project locally in
+     your IDE, for example. When deployed using ubos-admin, UBOS will
+     create a new context.xml file from the template file in tmpl/context.xml.tmpl
+     so the database information can be unique to the instance.
+
+     To use this configuration without the help of UBOS, you need to create a
+     MySQL database:
+     
+         create database gladiwasherejava
+         grant all privileges on gladiwasherejava.* to 'specialuser'@'localhost' identified by 'specialpass';
+         flush privileges;
+         
+     and initialize its schema:
+     
+         mysql gladiwasherejava < sql/create.sql
+-->
+
+<Context antiResourceLocking="true" path="/gladiwashere-java">
   <Resource auth="Container"
             type="javax.sql.DataSource"
             driverClassName="com.mysql.jdbc.Driver"
             name="jdbc/maindb"
-            url="jdbc:mysql://localhost/gladiwashere-java"
+            url="jdbc:mysql://localhost/gladiwasherejava"
             username="specialuser"
             password="specialpass"
             maxActive="20"
