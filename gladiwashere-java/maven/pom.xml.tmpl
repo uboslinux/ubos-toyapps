@@ -20,7 +20,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.38</version>
             <type>jar</type>
-            <scope>compile</scope> 
         </dependency>
     </dependencies>
 
@@ -39,19 +38,20 @@
 
     <profiles>
         <profile>
-            <id>pkgbuild</id>
+            <id>UBOS</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>2.1.1</version>
+                        <version>2.6</version>
                         <configuration>
                             <failOnMissingWebXml>false</failOnMissingWebXml>
                             <warSourceExcludes>META-INF/context.xml</warSourceExcludes>
                             <archive>
-                                <addMavenDescriptor>false</addMavenDescriptor>                 
+                                <addMavenDescriptor>true</addMavenDescriptor>
                             </archive>
+                            <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -59,3 +59,5 @@
         </profile>
     </profiles>
 </project>
+
+

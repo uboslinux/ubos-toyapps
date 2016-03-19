@@ -5,15 +5,17 @@ pkgname=$(basename $(pwd))
 pkgver=0.6
 pkgrel=1
 pkgdesc="Best Guestbook Evar, in Java this time"
+_groupId='net.ubos.ubos-toyapps'
 arch=('any')
-makedepends=('maven')
+makedepends=('maven' 'jdk8-openjdk' )
+depends=('java-runtime' 'diet4j')
 license=('GPL')
 options=('!strip')
 
 prepare() {
     cd ${startdir}/maven
     sed -e "s/PKGBUILD_VERSION/${pkgver}/" pom.xml.tmpl > pom.xml
-    mvn clean install ${MVN_OPTS} -Ppkgbuild
+    mvn clean install ${MVN_OPTS} -PUBOS
 }
 
 package() {
@@ -27,12 +29,19 @@ package() {
     install -m644 ${startdir}/appicons/license.txt $pkgdir/srv/http/_appicons/${pkgname}/
 
 # Code
-    mkdir -p ${pkgdir}/usr/share/${pkgname}/lib
-    install -m755 ${startdir}/maven/target/${pkgname}-${pkgver}.war ${pkgdir}/usr/share/${pkgname}/lib/${pkgname}.war
+    install -m644 -D ${startdir}/maven/target/${pkgname}-${pkgver}.war \
+                     ${pkgdir}/usr/lib/java/${_groupId//.//}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.war
 
+# Templates, with package/module names and versions replaced
     mkdir -p $pkgdir/usr/share/${pkgname}/tmpl
     install -m755 ${startdir}/tmpl/context.xml.tmpl ${pkgdir}/usr/share/${pkgname}/tmpl/
     install -m755 ${startdir}/tmpl/htaccess.tmpl    ${pkgdir}/usr/share/${pkgname}/tmpl/
+
+    groupId=${_groupId//./\\/}
+
+    sed -i -e "s/\${pkgname}/${pkgname}/g" ${pkgdir}/usr/share/${pkgname}/tmpl/context.xml.tmpl
+    sed -i -e "s/\${pkgver}/${pkgver}/g"   ${pkgdir}/usr/share/${pkgname}/tmpl/context.xml.tmpl
+    sed -i -e "s/\${groupId}/${groupId}/g" ${pkgdir}/usr/share/${pkgname}/tmpl/context.xml.tmpl
 
     mkdir -p ${pkgdir}/usr/share/${pkgname}/sql
     install -m755 ${startdir}/sql/create.sql ${pkgdir}/usr/share/${pkgname}/sql/

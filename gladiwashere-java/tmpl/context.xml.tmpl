@@ -2,7 +2,11 @@
 <Context path="${appconfig.context}"
          antiResourceLocking="true"
          cookies="false"
-         docBase="${package.codedir}/lib/gladiwashere-java.war">
+         docBase="/usr/lib/java/${groupId}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.war">
+
+  <Loader className="org.diet4j.tomcat.TomcatModuleLoader"
+           rootmodule="gladiwashere-java"/>
+
   <Resource auth="Container"
             type="javax.sql.DataSource"
             driverClassName="com.mysql.jdbc.Driver"
@@ -13,4 +17,5 @@
             maxActive="20"
             maxIdle="10"
             maxWait="-1"/>
+
 </Context>
