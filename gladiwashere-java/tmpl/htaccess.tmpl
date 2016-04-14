@@ -1,2 +1,6 @@
+ProxyPass /robots.txt !
+ProxyPass /favicon.ico !
+ProxyPass /sitemap.xml !
+
 ProxyPass ${appconfig.contextorslash} ajp://127.0.0.1:8009${appconfig.contextorslash}
 ProxyPassReverse ${appconfig.contextorslash} ajp://127.0.0.1:8009${appconfig.contextorslash}
