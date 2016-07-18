@@ -1,0 +1,29 @@
+{
+    "type"  : "accessory",
+
+    "accessoryinfo" : {
+        "appid"         : "gladiwashere",
+        "accessoryid"   : "footer"
+    },
+
+    "roles" : {
+        "apache2" : {
+            "appconfigitems" : [
+                {
+                    "type" : "file",
+                    "name" : "footer.php",
+                    "template"     : "tmpl/footer.php.tmpl",
+                    "templatelang" : "varsubst"
+                }
+            ]
+        }
+    },
+    "customizationpoints" : {
+        "message" : {
+            "name"     : "message",
+            "type"     : "string",
+            "required" : true
+        }
+    }
+}
+

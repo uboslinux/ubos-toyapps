@@ -86,4 +86,9 @@ mysqli_close( $db );
    </table>
   </form>
  </body>
+<?php
+if( file_exists( 'footer.php' )) {
+    require_once( 'footer.php' );
+}
+?>
 </html>
