@@ -1,0 +1,16 @@
+WSGIScriptAlias ${appconfig.contextorslash} ${package.codedir}/web/index.py
+
+WSGIDaemonProcess gladiwashere-python-${appconfig.appconfigid} processes=2 threads=10 \
+       umask=0007 inactivity-timeout=900 maximum-requests=1000 \
+       python-path=${package.codedir}/web:${appconfig.datadir}:/usr/lib/python3.6/site-packages/
+WSGIProcessGroup gladiwashere-python-${appconfig.appconfigid}
+
+# Can't do this because there may be more than one WSGI app:
+# WSGIApplicationGroup %{GLOBAL}
+
+<Directory "${package.codedir}">
+    Require all granted
+</Directory>
+<Directory "${appconfig.datadir}">
+    Require all granted
+</Directory>
