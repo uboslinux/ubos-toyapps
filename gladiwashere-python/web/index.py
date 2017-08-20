@@ -18,7 +18,6 @@
 # along with gladiwashere-python.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
 import gladiwashere
 
 def application(environ, start_response):
