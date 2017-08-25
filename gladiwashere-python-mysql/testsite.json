@@ -1,0 +1,17 @@
+{
+   "hostname" : "test1",
+   "appconfigs" : [
+      {
+         "appid" : "gladiwashere-python",
+         "context" : "/guestbook",
+         "appconfigid" : "a1921f744620fbbadefda431a8bd64844f518ea38"
+      }
+   ],
+   "siteid" : "s1fdc2c4269074646bbb9bb8b4d01fe6a81f7f653",
+   "admin" : {
+      "userid" : "admin",
+      "credential" : "qwerqw4er",
+      "username" : "admin",
+      "email" : "test@ubos.net"
+   }
+}
