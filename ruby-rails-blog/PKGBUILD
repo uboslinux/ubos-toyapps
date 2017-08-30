@@ -10,6 +10,7 @@ license=('GPL')
 options=('!strip')
 depends=(
     'ubos-rails-support'
+    'nodejs'
 )
 
 build() {
