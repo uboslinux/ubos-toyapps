@@ -1,0 +1,6 @@
+This is the blog example app from http://guides.rubyonrails.org/getting_started.html,
+with some additions, so it can be packaged for UBOS and installed with a single
+ubos-admin command.
+
+It's a bit unclear what the license is for this example app. We assume it's the 
+Ruby License and packaging it for UBOS is not intended to change that.
