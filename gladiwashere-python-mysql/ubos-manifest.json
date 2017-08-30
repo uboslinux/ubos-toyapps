@@ -38,7 +38,9 @@
                     "retentionpolicy"  : "keep",
                     "retentionbucket"  : "maindb",
                     "privileges"       : "select, insert"
-                },
+                }
+            ],
+            "installers" : [
                 {
                     "name"   : "maindb",
                     "type"   : "sqlscript",

@@ -30,8 +30,8 @@ use UBOS::WebAppTest;
 # The states and transitions for this test
 
 my $TEST = new UBOS::WebAppTest(
-    appToTest   => 'gladiwashere-python-mysql',
-    description => 'Tests whether anonymous guests can leave messages on the gladiwashere-python-mysql app.',
+    appToTest   => 'gladiwashere-python',
+    description => 'Tests whether anonymous guests can leave messages on the gladiwashere-python app.',
     checks      => [
             new UBOS::WebAppTest::StateCheck(
                     name  => 'virgin',

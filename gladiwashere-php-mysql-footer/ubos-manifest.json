@@ -2,7 +2,7 @@
     "type"  : "accessory",
 
     "accessoryinfo" : {
-        "appid"         : "gladiwashere",
+        "appid"         : "gladiwashere-php-mysql",
         "accessoryid"   : "footer"
     },
 

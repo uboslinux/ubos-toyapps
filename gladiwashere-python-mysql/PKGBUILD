@@ -4,7 +4,7 @@ maintainer=${developer}
 pkgname=$(basename $(pwd))
 pkgver=0.1
 pkgrel=1
-pkgdesc="Best Guestbook Evar, in Python this time"
+pkgdesc="Best Guestbook Evar, in Python this time, using MySQL"
 arch=('any')
 license=('GPL')
 options=('!strip')
@@ -16,8 +16,8 @@ package() {
 
 # Icons
     mkdir -p ${pkgdir}/srv/http/_appicons/${pkgname}
-    install -m644 ${startdir}/appicons/{72x72,144x144}.png ${pkgdir}/srv/http/_appicons/$pkgname/
-    install -m644 ${startdir}/appicons/license.txt ${pkgdir}/srv/http/_appicons/$pkgname/
+    install -m644 ${startdir}/appicons/{72x72,144x144}.png ${pkgdir}/srv/http/_appicons/${pkgname}/
+    install -m644 ${startdir}/appicons/license.txt ${pkgdir}/srv/http/_appicons/${pkgname}/
 
 # Data dir -- we put the generated python file there, could put below DocumentRoot instead but this is more secure
     mkdir -p ${pkgdir}/var/lib/${pkgname}

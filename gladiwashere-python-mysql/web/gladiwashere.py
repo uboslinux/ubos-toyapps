@@ -62,7 +62,7 @@ def doIt(environ) :
  </head>
  <body>
   <h1>Glad-I-Was-Here Guestbook</h1>
-  <p>Example MySQL/Python app for <a href="http://ubos.net/">UBOS</a>.</p>
+  <p>Example Python/MySQL app for <a href="http://ubos.net/">UBOS</a>.</p>
 '''
   first = True
   for (id, created, name, email, comment) in cursor:

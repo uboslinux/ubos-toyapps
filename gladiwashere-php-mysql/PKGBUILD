@@ -4,28 +4,28 @@ maintainer=$developer
 pkgname=$(basename $(pwd))
 pkgver=0.9
 pkgrel=1
-pkgdesc="Best Guestbook Evar"
+pkgdesc="Best Guestbook Evar, in PHP this time, using MySQL"
 arch=('any')
 license=('GPL')
 options=('!strip')
 
 package() {
 # Manifest
-    mkdir -p $pkgdir/var/lib/ubos/manifests
-    install -m0644 $startdir/ubos-manifest.json $pkgdir/var/lib/ubos/manifests/${pkgname}.json
+    mkdir -p ${pkgdir}/var/lib/ubos/manifests
+    install -m0644 ${startdir}/ubos-manifest.json ${pkgdir}/var/lib/ubos/manifests/${pkgname}.json
 
 # Icons
-    mkdir -p $pkgdir/srv/http/_appicons/${pkgname}
-    install -m644 $startdir/appicons/{72x72,144x144}.png $pkgdir/srv/http/_appicons/$pkgname/
-    install -m644 $startdir/appicons/license.txt $pkgdir/srv/http/_appicons/$pkgname/
+    mkdir -p ${pkgdir}/srv/http/_appicons/${pkgname}
+    install -m644 ${startdir}/appicons/{72x72,144x144}.png ${pkgdir}/srv/http/_appicons/${pkgname}/
+    install -m644 ${startdir}/appicons/license.txt ${pkgdir}/srv/http/_appicons/${pkgname}/
 
 # Code
-    mkdir -p $pkgdir/usr/share/${pkgname}/web
-    install -m755 $startdir/web/{index,gladiwashere}.php  $pkgdir/usr/share/${pkgname}/web/
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/web
+    install -m755 ${startdir}/web/{index,gladiwashere}.php ${pkgdir}/usr/share/${pkgname}/web/
 
-    mkdir -p $pkgdir/usr/share/${pkgname}/tmpl
-    install -m755 $startdir/tmpl/config.php.tmpl $pkgdir/usr/share/${pkgname}/tmpl/
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/tmpl
+    install -m755 ${startdir}/tmpl/config.php.tmpl ${pkgdir}/usr/share/${pkgname}/tmpl/
 
-    mkdir -p $pkgdir/usr/share/${pkgname}/sql
-    install -m755 $startdir/sql/create.sql $pkgdir/usr/share/${pkgname}/sql/
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/sql
+    install -m755 ${startdir}/sql/create.sql ${pkgdir}/usr/share/${pkgname}/sql/
 }

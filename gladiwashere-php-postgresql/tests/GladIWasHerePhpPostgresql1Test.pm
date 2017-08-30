@@ -30,14 +30,14 @@ use UBOS::WebAppTest;
 # The states and transitions for this test
 
 my $TEST = new UBOS::WebAppTest(
-    appToTest   => 'gladiwashere-postgresql',
-    description => 'Tests whether anonymous guests can leave messages on the gladiwashere-postgresql app.',
+    appToTest   => 'gladiwashere-php-postgresql',
+    description => 'Tests whether anonymous guests can leave messages on the gladiwashere-php-postgresql app.',
     checks      => [
             new UBOS::WebAppTest::StateCheck(
                     name  => 'virgin',
                     check => sub {
                         my $c = shift;
-                        
+
                         $c->getMustContain(    '/', 'Glad-I-Was-Here Guestbook', undef, 'Wrong front page' );
                         $c->getMustNotContain( '/', 'This is a great site',      undef, 'Guestbook entry still there' );
 

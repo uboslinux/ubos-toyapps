@@ -4,7 +4,7 @@ maintainer=${developer}
 pkgname=$(basename $(pwd))
 pkgver=0.9
 pkgrel=1
-pkgdesc="Best Guestbook Evar, in Java this time"
+pkgdesc="Best Guestbook Evar, in Java this time, using MySQL"
 _groupId='net.ubos.ubos-toyapps'
 arch=('any')
 makedepends=('maven' 'jdk8-openjdk' )
@@ -33,7 +33,7 @@ package() {
                      ${pkgdir}/usr/lib/java/${_groupId//.//}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.war
 
 # Templates, with package/module names and versions replaced
-    mkdir -p $pkgdir/usr/share/${pkgname}/tmpl
+    mkdir -p ${pkgdir}/usr/share/${pkgname}/tmpl
     install -m755 ${startdir}/tmpl/context.xml.tmpl ${pkgdir}/usr/share/${pkgname}/tmpl/
     install -m755 ${startdir}/tmpl/htaccess.tmpl    ${pkgdir}/usr/share/${pkgname}/tmpl/
 

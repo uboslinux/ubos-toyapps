@@ -37,7 +37,7 @@
  </head>
  <body>
   <h1>Glad-I-Was-Here Guestbook</h1>
-  <p>Example Postgresql/PHP app for <a href="http://ubos.net/">UBOS</a>.</p>
+  <p>Example PHP/Postgresql app for <a href="http://ubos.net/">UBOS</a>.</p>
 <?php
 $first = TRUE;
 while( $row = pg_fetch_assoc( $query )) {
