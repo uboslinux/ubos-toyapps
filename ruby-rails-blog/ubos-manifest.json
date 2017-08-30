@@ -3,7 +3,7 @@
 
     "roles" : {
         "apache2" : {
-            "defaultcontext" : "",
+            "fixedcontext" : "",
             "depends" : [
                 "passenger"
             ],
