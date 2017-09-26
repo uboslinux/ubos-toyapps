@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  context.xml file for running gladiwashere-java-mysql WITHOUT the help
+  of UBOS in your local IDE, for example.
+
+  When deployed using ubos-admin, UBOS will create a new context.xml
+  file from the template file in tmpl/context.xml.tmpl so the database
+  information can be unique to the instance.
+
+  To use this configuration without the help of UBOS, you need to create
+  a MySQL database yourself:
+     
+          create database gladiwasherejava
+          grant all privileges on gladiwasherejava.* to 'specialuser'@'localhost' identified by 'specialpass';
+          flush privileges;
+         
+  and initialize its schema:
+     
+           mysql gladiwasherejava < sql/create.sql
+
+
+  This file is part of gladiwashere-java-mysql.
+  (C) 2012-2017 Indie Computing Corp.
+  
+  gladiwashere-java-mysql is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+ 
+  gladiwashere-java-mysql is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with gladiwashere-java-mysql.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Context antiResourceLocking="true" path="/gladiwashere-java">
+  <Resource auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="com.mysql.jdbc.Driver"
+            name="jdbc/maindb"
+            url="jdbc:mysql://localhost/gladiwasherejava"
+            username="specialuser"
+            password="specialpass"
+            maxActive="20"
+            maxIdle="10"
+            maxWait="-1"/>
+</Context>
