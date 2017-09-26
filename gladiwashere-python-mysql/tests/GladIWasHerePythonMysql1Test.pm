@@ -31,7 +31,12 @@ use UBOS::WebAppTest;
 my $TEST = new UBOS::WebAppTest(
     appToTest   => 'gladiwashere-python-mysql',
     description => 'Tests whether anonymous guests can leave messages on the gladiwashere-python-mysql app.',
-    checks      => [
+
+    packageDbsToAdd => {
+        'toyapps' => 'http://depot.ubos.net/$channel/$arch/toyapps'
+    },
+
+    checks => [
             new UBOS::WebAppTest::StateCheck(
                     name  => 'virgin',
                     check => sub {
