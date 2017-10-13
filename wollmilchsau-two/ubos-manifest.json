@@ -1,0 +1,104 @@
+{
+    "type"  : "accessory",
+
+    "accessoryinfo" : {
+        "appid"         : "wollmilchsau",
+        "accessorytype" : "type two"
+    },
+
+    "roles" : {
+        "apache2" : {
+            "appconfigitems" : [
+                {
+                    "type"         : "file",
+                    "name"         : "from-accessories/content-${package.name}.json",
+                    "template"     : "tmpl/content.json.tmpl",
+                    "templatelang" : "varsubst"
+                }
+            ]
+        }
+    },
+    "customizationpoints" : {
+        "justmetwo" : {
+            "name"     : "Just Me 2",
+            "type"     : "string",
+            "required" : true,
+            "default"  : {
+                "value" : "Just in acc two default"
+            }
+        },
+        "string1" : {
+            "name"     : "String 1",
+            "type"     : "string",
+            "required" : false,
+            "default"  : {
+                "value" : "    My default for '\"string1 (acc-two)"
+            }
+        },
+        "string2" : {
+            "name"     : "String 2",
+            "type"     : "string",
+            "required" : false,
+            "regex"    : "[-a-zA-Z1-9]+",
+            "default"  : {
+                "value" : "My-default-for-string2-acc2"
+            }
+        },
+        "email3" : {
+            "name"     : "Email 3",
+            "type"     : "email",
+            "required" : false,
+            "default"  : {
+                "value" : "testing-default-acc2@ubos.net"
+            }
+        },
+        "url4" : {
+            "name"     : "URL 4",
+            "type"     : "url",
+            "required" : false,
+            "default"  : {
+                "value" : "http://ubos.net/docs/default/acc2"
+            }
+        },
+        "url5" : {
+            "name"     : "URL 5",
+            "type"     : "url",
+            "required" : false,
+            "default"  : {
+                "value" : "https://ubos.net/docs/default/acc2"
+            }
+        },
+        "text6" : {
+            "name"     : "Text 6",
+            "type"     : "text",
+            "required" : false,
+            "default"  : {
+                "value" : "Default\ntext\nacc2"
+            }
+        },
+        "password7" : {
+            "name"     : "Password 7",
+            "type"     : "password",
+            "required" : false,
+            "default"  : {
+                "value" : "default secret acc2"
+            }
+        },
+        "boolean8" : {
+            "name"     : "Boolean 8",
+            "type"     : "boolean",
+            "required" : false,
+            "default"  : {
+                "value" : 1
+            }
+        },
+        "integer9" : {
+            "name"     : "Integer 9",
+            "type"     : "integer",
+            "required" : false,
+            "default"  : {
+                "value" : 1222
+            }
+        }
+    }
+}

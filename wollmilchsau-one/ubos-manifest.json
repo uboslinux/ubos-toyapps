@@ -1,0 +1,89 @@
+{
+    "type"  : "accessory",
+
+    "accessoryinfo" : {
+        "appid"         : "wollmilchsau",
+        "accessorytype" : "type one"
+    },
+
+    "roles" : {
+        "apache2" : {
+            "appconfigitems" : [
+                {
+                    "type"         : "file",
+                    "name"         : "from-accessories/content-${package.name}.json",
+                    "template"     : "tmpl/content.json.tmpl",
+                    "templatelang" : "varsubst"
+                }
+            ]
+        }
+    },
+    "customizationpoints" : {
+        "justmeone" : {
+            "name"     : "Just Me 1",
+            "type"     : "string",
+            "required" : true,
+            "default"  : {
+                "value" : "Just in acc one default"
+            }
+        },
+        "string1" : {
+            "name"     : "String 1",
+            "type"     : "string",
+            "required" : false,
+            "default"  : {
+                "value" : "    My default for string1 (acc-one)"
+            }
+        },
+        "string2" : {
+            "name"     : "String 2",
+            "type"     : "string",
+            "required" : false,
+            "regex"    : "[-a-zA-Z1-9]+",
+            "default"  : {
+                "value" : "My-default-for-string2-acc1"
+            }
+        },
+        "integer10" : {
+            "name"     : "Integer 10",
+            "type"     : "integer",
+            "required" : false,
+            "default"  : {
+                "value" : -1201
+            }
+        },
+        "positiveinteger11" : {
+            "name"     : "Positive integer 11",
+            "type"     : "positiveinteger",
+            "required" : false,
+            "default"  : {
+                "value" : 3411
+            }
+        },
+        "positiveintegerorzero12" : {
+            "name"     : "Positive integer or zero 12",
+            "type"     : "positiveintegerorzero",
+            "required" : false,
+            "default"  : {
+                "value" : 5611
+            }
+        },
+        "positiveintegerorzero13" : {
+            "name"     : "Positive integer or zero 13",
+            "type"     : "positiveintegerorzero",
+            "required" : false,
+            "default"  : {
+                "value" : 0
+            }
+        },
+        "image14" : {
+            "name"     : "Image 14",
+            "type"     : "image",
+            "required" : false,
+            "default"  : {
+                "encoding" : "base64",
+                "value" : "iVBORw0KGgoAAAANSUhEUgAAAEYAAAAWCAIAAAGFxU2yAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA\nGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABA9JREFUeNpiLN0fy4ALAOXCelzg\nXAFJHohqEIlHH0AAMeKRY3p49jma0KFZ5z48/wKSkzeW3NV7Asg6ufwqhLRLM7p54CGQDRBAIPv0\nfVSBCOEEBgagNH42C5BSd5BHs9E8UvvU8isQHwHZQAR0A0QnkEHAB3gAQACRpQ3uH7diC2AAAJ0O\ncTDcqxAvQNjiasJAkgWuGajox+dfQA9c3HJb3V4eGLjdjoshSoEMhnqQmriZXqDAxWo50GCgTkwX\nAQVnR62Hug3oKogoxG0Q50GkOHjZgFxIIgGygc4jJwwAAjBOxjYMQkEMVRbLCLRMQUcfZQamgJI6\nDdkCunRQkBnyJH8Zo0hRrkAfcT77/M3lUByW+JXxQ/tIAFaxeSZIiaFTYlXj/an0uL8w4RMTsxsy\ntsNInQ2QCFBd1eO0lyOneNSM9Ty9OHNgfVOW5P1TgJV5iik8ocklkAITc5GLJrtCj9QUJkVjXd4C\nb8uugH+bxiy2AYzk/B2V/ep2hQ9N3hVKpep0tzgugH3LO1Plpx/3JDOz/yMAb+VugzAQBFEJUQER\nFThCSCSkFIAICAkIoScaoE4ePDQsF1icAywH91nf7szNjic24IRn3lRNYqQRWiBQc0q/QWOm6khH\n0XN8JLCN5+jAcpzp5X7MuJJmjB3HbSWH6155Xfec2Qjeqgir5sIZgxLhoV1KRodsWRBKiZrq+tvO\nu7hWL1Sg+1YmgUL61GekQF35tZ9yl3JCPzQBy2EhGrhSw2qSaV8meYC3p1O+zm3+bTW3vxn5JN5v\n+9izOnJsTyubJlsA0n5AH+rOt71S/GDSSfW6NG/NIRVu7a4b7Z0jePOJLmUwelkfBte/HFYfI5ml\nkVixgr32U90a6ad4DdUo1796xEOA7ssYJ4EwiMKEEGLhAezkDjZWhMrSa9BzArgAh9AbaKSgpLK1\ntqc3XoCPPPMyzvwQMRsKptt//8zOzHvzZvZ8XzqbDWrDVG5jUQttQAb7Io5NQ+IBS8SsM7m5jBjc\nRKHmfTw/zO693v1CyUyq06bqRJxRPk87RiyEP2ReVj/NV2TyNF0178feOFmK/mcUxSlRacoJMg7a\nQUQNo9hSO67xlkepdp0tLqJU8Op6mInXicX1qUk89jMf1vgUNGmIk/stenLLTXbml/kGNKBrb/FD\nNnR3dHfD28SmjlMiAgvi1/ZbAg5Qz9M3JD21098Nn0Dq/QTPougmdLUTG3TOtNhLsEIyQIHXy3ew\n4t9FCJAnhxUoDi0bcuUdS42qQw0NN39c8vspINeYUKLCQGj3KMWOcR8xPMSdUTB6hNEzmqxRHtRI\nCjr9o368fiZ1jbuEKdCYSxRpT9kDljQnDeNDlpTwVBGnLkemBTA8zscG/AJHbb93cbYDdVK1J+yu\nDbQAAAAASUVORK5CYII="
+            }
+        }
+    }
+}

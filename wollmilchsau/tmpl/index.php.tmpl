@@ -1,0 +1,321 @@
+<html>
+ <head>
+  <title>wollmilchsau: UBOS testing app</title>
+  <style>
+* {
+    font-family: Arial, Sans-Serif;
+}
+html,
+table {
+    font-size: 12px;
+}
+pre, code {
+    font-family: Courier New, Courier;
+}
+pre::before,
+code::before {
+    content: "[";
+}
+pre::after,
+code::after {
+    content: "]";
+}
+pre {
+    margin: 0;
+}
+h1 {
+    text-align: center;
+}
+h2 {
+    background: #f0f0f0;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #808080;
+    padding: 1px 5px;
+}
+tbody th {
+    text-align: left;
+}
+  </style>
+ </head>
+ <body>
+  <h1>wollmilchsau -- UBOS testing app</h1>
+
+  <h2>Variables</h2>
+  <table>
+   <thead>
+    <tr>
+     <th>Name</th>
+     <th>Value</th>
+    </tr>
+   </thead>
+   <tr>
+    <th>Accessory Ids:</th>
+    <td><code>${appconfig.accessoryids}</code></th>
+   </tr>
+   <tr>
+    <th>AppConfigId:</th>
+    <td><code>${appconfig.appconfigid}</code></th>
+   </tr>
+   <tr>
+    <th>Context:</th>
+    <td><code>${appconfig.context}</code></th>
+   </tr>
+   <tr>
+    <th>ContextNoSlashOrRoot:</th>
+    <td><code>${appconfig.contextnoslashorroot}</code></th>
+   </tr>
+   <tr>
+    <th>ContextOrSlash:</th>
+    <td><code>${appconfig.contextorslash}</code></th>
+   </tr>
+   <tr>
+    <th>DataDir:</th>
+    <td><code>${appconfig.datadir}</code></th>
+   </tr>
+   <tr>
+    <th>Admin credential:</th>
+    <td><code>${site.admin.credential}</code></th>
+   </tr>
+   <tr>
+    <th>Admin credential:</th>
+    <td><code>${site.admin.email}</code></th>
+   </tr>
+   <tr>
+    <th>Admin userid:</th>
+    <td><code>${site.admin.userid}</code></th>
+   </tr>
+   <tr>
+    <th>Admin username:</th>
+    <td><code>${site.admin.username}</code></th>
+   </tr>
+   <tr>
+    <th>Site hostname:</th>
+    <td><code>${site.hostname}</code></th>
+   </tr>
+   <tr>
+    <th>Site protocol:</th>
+    <td><code>${site.protocol}</code></th>
+   </tr>
+   <tr>
+    <th>Site protocolport:</th>
+    <td><code>${site.protocolport}</code></th>
+   </tr>
+   <tr>
+    <th>Site id:</th>
+    <td><code>${site.siteid}</code></th>
+   </tr>
+  </table>
+
+  <h2>Random values</h2>
+
+  <table>
+   <thead>
+    <tr>
+     <th>Name</th>
+     <th>Value</th>
+    </tr>
+   </thead>
+   <tr>
+    <th>randomHex(1)</th>
+    <td><code>${randomHex(1)}</code></th>
+   </tr>
+   <tr>
+    <th>randomHex(8)</th>
+    <td><code>${randomHex(8)}</code></th>
+   </tr>
+   <tr>
+    <th>randomHex(40)</th>
+    <td><code>${randomHex(40)}</code></th>
+   </tr>
+   <tr>
+    <th>randomIdentifier(1)</th>
+    <td><code>${randomIdentifier(1)}</code></th>
+   </tr>
+   <tr>
+    <th>randomIdentifier(8)</th>
+    <td><code>${randomIdentifier(8)}</code></th>
+   </tr>
+   <tr>
+    <th>randomIdentifier(40)</th>
+    <td><code>${randomIdentifier(40)}</code></th>
+   </tr>
+   <tr>
+    <th>randomPassword(1)</th>
+    <td><code>${randomPassword(1)}</code></th>
+   </tr>
+   <tr>
+    <th>randomPassword(8)</th>
+    <td><code>${randomPassword(8)}</code></th>
+   </tr>
+   <tr>
+    <th>randomPassword(40)</th>
+    <td><code>${randomPassword(40)}</code></th>
+   </tr>
+  </table>
+
+  <h2>App</h2>
+
+<?php
+    $fileName = '${appconfig.apache2.dir}/app-content.json';
+    $json     = json_decode( file_get_contents( $fileName ), true );
+?>
+  <p>Name: <code><?= $json['name'] ?></code></p>
+  <table>
+   <thead>
+    <tr>
+     <th>Customizationpoint</th>
+     <th>Value</th>
+     <th>Value (squote)</th>
+     <th>Value (dquote)</th>
+     <th>Value (trim)</th>
+     <th>Value (cs2space)</th>
+     <th>Filename</th>
+    </tr>
+   </thead>
+<?php
+    foreach( array( 'string1', 'string2', 'email3', 'url4', 'url5', 'text6', 'password7',
+                    'boolean8', 'integer9', 'integer10', 'positiveinteger11',
+                    'positiveintegerorzero12', 'positiveintegerorzero13', 'image14' ) as $name ) {
+?>
+   <tr>
+    <td><code><?= $name ?></code></td>
+    <td><pre><?= $json['customizationpoints'][$name]['value'] ?></pre></td>
+    <td><pre><?= $json['customizationpoints'][$name]['escapeSquoteValue'] ?></pre></td>
+    <td><pre><?= $json['customizationpoints'][$name]['escapeDquoteValue'] ?></pre></td>
+    <td><pre><?= $json['customizationpoints'][$name]['trimValue'] ?></pre></td>
+    <td><pre><?= $json['customizationpoints'][$name]['cr2spaceValue'] ?></pre></td>
+    <td><code><?= $json['customizationpoints'][$name]['filename'] ?></code></td>
+   </tr>
+<?php
+    }
+?>
+  </table>
+
+  <h2>Accessories</h2>
+<?php
+if( $dirHandle = opendir( '${appconfig.apache2.dir}/from-accessories')) {
+?>
+  <table>
+   <thead>
+    <tr>
+     <th>Accessory</th>
+     <th>Property</th>
+     <th>Value</th>
+    </tr>
+   </thead>
+<?php
+    while( false !== ( $dirEntry = readdir( $dirHandle ))) {
+        if( $dirEntry == '.' || $dirEntry == '..' ) {
+            continue;
+        }
+
+        $fileName = '${appconfig.apache2.dir}/from-accessories/$dirEntry';
+        $json     = json_decode( file_get_contents( $fileName ), true );
+
+?>
+   <tr>
+    <th rowspan="3"><?= $json['name'] ?></th>
+    <td>App id</td>
+    <td><?= $json['appid'] ?></td>
+   </tr>
+   <tr>
+    <td>Accessory id</td>
+    <td><?= $json['accessoryid'] ?></td>
+   </tr>
+   <tr>
+    <td>Accessory type</td>
+    <td><?= $json['accessorytype'] ?></td>
+   </tr>
+<?php
+    }
+    closedir( $dirHandle );
+?>
+  </table>
+<?php
+} else {
+?>
+  <p class="error">Cannot open directory <code>${appconfig.apache2.dir}/from-accessories</code>.</p>
+<?php
+}
+
+?>
+  <h2>Customizationpoints</h2>
+<?php
+if( $dirHandle = opendir( '${appconfig.apache2.dir}/from-accessories')) {
+?>
+  <table>
+   <thead>
+    <tr>
+     <th>Accessory</th>
+     <th>Customizationpoint</th>
+     <th>Value</th>
+     <th>Value (squote)</th>
+     <th>Value (dquote)</th>
+     <th>Value (trim)</th>
+     <th>Value (cs2space)</th>
+     <th>Filename</th>
+    </tr>
+   </thead>
+<?php
+    while( false !== ( $dirEntry = readdir( $dirHandle ))) {
+        if( $dirEntry == '.' || $dirEntry == '..' ) {
+            continue;
+        }
+
+        $fileName = '${appconfig.apache2.dir}/from-accessories/$dirEntry';
+        $json     = json_decode( file_get_contents( $fileName ), true );
+
+        $nCustomizationPoints = count( $json['customizationpoints'] );
+        if( $nCustomizationPoints > 0 ) {
+            $isFirst = TRUE;
+
+            foreach( $json['customizationpoints'] as $name => $data ) {
+?>
+   <tr>
+<?php
+                if( $isFirst ) {
+?>
+    <th rowspan="<?= $nCustomizationPoints?>"><code><?= $json['name'] ?></code></th>
+<?php
+                    $isFirst = FALSE;
+                }
+?>
+    <td><code><?= $name ?></code></td>
+    <td><pre><?= $data['value'] ?></pre></td>
+    <td><pre><?= $data['escapeSquoteValue'] ?></pre></td>
+    <td><pre><?= $data['escapeDquoteValue'] ?></pre></td>
+    <td><pre><?= $data['trimValue'] ?></pre></td>
+    <td><pre><?= $data['cr2spaceValue'] ?></pre></td>
+    <td><code><?= $data['filename'] ?></code></td>
+   </tr>
+<?php
+            }
+        } else {
+            // nothing to show
+        }
+    }
+    closedir( $dirHandle );
+?>
+  </table>
+<?php
+} else {
+?>
+  <p class="error">Cannot open directory <code>${appconfig.apache2.dir}/from-accessories</code>.</p>
+<?php
+}
+?>
+  <hr />
+  <p>Source code <a href="https://github.com/uboslinux/ubos-toyapps/tree/master/wollmilchsau/">in git</a>.</p>
+ </body>
+</html>
+
+
+
+
+
+
