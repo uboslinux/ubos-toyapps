@@ -11,8 +11,8 @@
             "appconfigitems" : [
                 {
                     "type"         : "file",
-                    "name"         : "from-accessories/content-${package.name}.json",
-                    "template"     : "tmpl/content.json.tmpl",
+                    "name"         : "from-accessories/content-${package.name}.txt",
+                    "template"     : "tmpl/content.txt.tmpl",
                     "templatelang" : "varsubst"
                 }
             ]
@@ -81,7 +81,7 @@
             "type"     : "password",
             "required" : false,
             "default"  : {
-                "value" : "default secret acc2"
+                "value" : "default-secret-acc2"
             }
         },
         "boolean8" : {

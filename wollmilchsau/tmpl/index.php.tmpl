@@ -1,3 +1,41 @@
+<?php
+function readData( $filename ) {
+    $ret = array();
+
+    $content = file_get_contents( $filename );
+    $elements = preg_split( '/^!?/m', $content );
+    foreach( $elements as $element ) {
+        if( preg_match( '/(.*?):(.*)/', $element, $matches )) {
+            $name  = $matches[1];
+            $value = $matches[2];
+
+            $nameComponents = preg_split( '/\./', $name );
+
+            $current = &$ret;
+            $nameComponentsWithoutLast = $nameComponents;
+            array_pop( $nameComponentsWithoutLast );
+            foreach( $nameComponentsWithoutLast as $nameComponent ) {
+                if( !array_key_exists( $nameComponent, $current )) {
+                    $current[$nameComponent] = array();
+                }
+                $current = &$current[$nameComponent];
+            }
+            $last = end( $nameComponents );
+            $current[$last] = $value;
+        }
+    }
+    return $ret;
+}
+
+function emit( $s ) {
+    if( preg_match( '/[^[:print:]]/', $s )) {
+        return '-- (binary) --';
+    } else {
+        return $s;
+    }
+}
+
+?>
 <html>
  <head>
   <title>wollmilchsau: UBOS testing app</title>
@@ -159,12 +197,10 @@ tbody th {
   </table>
 
   <h2>App</h2>
-
 <?php
-    $fileName = '${appconfig.apache2.dir}/app-content.json';
-    $json     = json_decode( file_get_contents( $fileName ), true );
+    $appData = readData( '${appconfig.apache2.dir}/app-content.txt' );
 ?>
-  <p>Name: <code><?= $json['name'] ?></code></p>
+  <p>Name: <code><?= $appData['name'] ?></code></p>
   <table>
    <thead>
     <tr>
@@ -184,12 +220,12 @@ tbody th {
 ?>
    <tr>
     <td><code><?= $name ?></code></td>
-    <td><pre><?= $json['customizationpoints'][$name]['value'] ?></pre></td>
-    <td><pre><?= $json['customizationpoints'][$name]['escapeSquoteValue'] ?></pre></td>
-    <td><pre><?= $json['customizationpoints'][$name]['escapeDquoteValue'] ?></pre></td>
-    <td><pre><?= $json['customizationpoints'][$name]['trimValue'] ?></pre></td>
-    <td><pre><?= $json['customizationpoints'][$name]['cr2spaceValue'] ?></pre></td>
-    <td><code><?= $json['customizationpoints'][$name]['filename'] ?></code></td>
+    <td><pre><?= emit( $appData['customizationpoints'][$name]['value']             ) ?></pre></td>
+    <td><pre><?= emit( $appData['customizationpoints'][$name]['escapeSquoteValue'] ) ?></pre></td>
+    <td><pre><?= emit( $appData['customizationpoints'][$name]['escapeDquoteValue'] ) ?></pre></td>
+    <td><pre><?= emit( $appData['customizationpoints'][$name]['trimValue'] )         ?></pre></td>
+    <td><pre><?= emit( $appData['customizationpoints'][$name]['cr2spaceValue'] )     ?></pre></td>
+    <td><code><?= emit( $appData['customizationpoints'][$name]['filename'] )         ?></code></td>
    </tr>
 <?php
     }
@@ -198,6 +234,7 @@ tbody th {
 
   <h2>Accessories</h2>
 <?php
+$allAccData = array();
 if( $dirHandle = opendir( '${appconfig.apache2.dir}/from-accessories')) {
 ?>
   <table>
@@ -214,22 +251,21 @@ if( $dirHandle = opendir( '${appconfig.apache2.dir}/from-accessories')) {
             continue;
         }
 
-        $fileName = '${appconfig.apache2.dir}/from-accessories/$dirEntry';
-        $json     = json_decode( file_get_contents( $fileName ), true );
-
+        $newAccData = readData( "${appconfig.apache2.dir}/from-accessories/$dirEntry" );
+        $allAccData[$newAccData['name']] = $newAccData;
 ?>
    <tr>
-    <th rowspan="3"><?= $json['name'] ?></th>
+    <th rowspan="3"><?= $newAccData['name'] ?></th>
     <td>App id</td>
-    <td><?= $json['appid'] ?></td>
+    <td><?= $newAccData['appid'] ?></td>
    </tr>
    <tr>
     <td>Accessory id</td>
-    <td><?= $json['accessoryid'] ?></td>
+    <td><?= $newAccData['accessoryid'] ?></td>
    </tr>
    <tr>
     <td>Accessory type</td>
-    <td><?= $json['accessorytype'] ?></td>
+    <td><?= $newAccData['accessorytype'] ?></td>
    </tr>
 <?php
     }
@@ -242,12 +278,8 @@ if( $dirHandle = opendir( '${appconfig.apache2.dir}/from-accessories')) {
   <p class="error">Cannot open directory <code>${appconfig.apache2.dir}/from-accessories</code>.</p>
 <?php
 }
-
 ?>
   <h2>Customizationpoints</h2>
-<?php
-if( $dirHandle = opendir( '${appconfig.apache2.dir}/from-accessories')) {
-?>
   <table>
    <thead>
     <tr>
@@ -262,53 +294,40 @@ if( $dirHandle = opendir( '${appconfig.apache2.dir}/from-accessories')) {
     </tr>
    </thead>
 <?php
-    while( false !== ( $dirEntry = readdir( $dirHandle ))) {
-        if( $dirEntry == '.' || $dirEntry == '..' ) {
-            continue;
-        }
+foreach( $allAccData as $accName => $accData ) {
 
-        $fileName = '${appconfig.apache2.dir}/from-accessories/$dirEntry';
-        $json     = json_decode( file_get_contents( $fileName ), true );
+    $nCustomizationPoints = count( $accData['customizationpoints'] );
+    if( $nCustomizationPoints > 0 ) {
+        $isFirst = TRUE;
 
-        $nCustomizationPoints = count( $json['customizationpoints'] );
-        if( $nCustomizationPoints > 0 ) {
-            $isFirst = TRUE;
-
-            foreach( $json['customizationpoints'] as $name => $data ) {
+        foreach( $accData['customizationpoints'] as $name => $data ) {
 ?>
    <tr>
 <?php
-                if( $isFirst ) {
+            if( $isFirst ) {
 ?>
-    <th rowspan="<?= $nCustomizationPoints?>"><code><?= $json['name'] ?></code></th>
+    <th rowspan="<?= $nCustomizationPoints?>"><code><?= $accName ?></code></th>
 <?php
-                    $isFirst = FALSE;
-                }
+                $isFirst = FALSE;
+            }
 ?>
     <td><code><?= $name ?></code></td>
-    <td><pre><?= $data['value'] ?></pre></td>
-    <td><pre><?= $data['escapeSquoteValue'] ?></pre></td>
-    <td><pre><?= $data['escapeDquoteValue'] ?></pre></td>
-    <td><pre><?= $data['trimValue'] ?></pre></td>
-    <td><pre><?= $data['cr2spaceValue'] ?></pre></td>
-    <td><code><?= $data['filename'] ?></code></td>
+    <td><pre><?= emit( $data['value']             ) ?></pre></td>
+    <td><pre><?= emit( $data['escapeSquoteValue'] ) ?></pre></td>
+    <td><pre><?= emit( $data['escapeDquoteValue'] ) ?></pre></td>
+    <td><pre><?= emit( $data['trimValue'] )         ?></pre></td>
+    <td><pre><?= emit( $data['cr2spaceValue'] )     ?></pre></td>
+    <td><code><?= emit( $data['filename'] )         ?></code></td>
    </tr>
 <?php
-            }
-        } else {
-            // nothing to show
         }
+    } else {
+        // nothing to show
     }
-    closedir( $dirHandle );
-?>
-  </table>
-<?php
-} else {
-?>
-  <p class="error">Cannot open directory <code>${appconfig.apache2.dir}/from-accessories</code>.</p>
-<?php
 }
 ?>
+  </table>
+
   <hr />
   <p>Source code <a href="https://github.com/uboslinux/ubos-toyapps/tree/master/wollmilchsau/">in git</a>.</p>
  </body>

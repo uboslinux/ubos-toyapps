@@ -20,8 +20,8 @@
                 },
                 {
                     "type"         : "file",
-                    "name"         : "app-content.json",
-                    "template"     : "tmpl/app-content.json.tmpl",
+                    "name"         : "app-content.txt",
+                    "template"     : "tmpl/app-content.txt.tmpl",
                     "templatelang" : "varsubst"
                 },
                 {

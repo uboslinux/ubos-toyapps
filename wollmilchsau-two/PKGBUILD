@@ -16,5 +16,5 @@ package() {
 
 # Source
     mkdir -p ${pkgdir}/usr/share/${pkgname}/tmpl
-    install -m644 ${startdir}/tmpl/content.json.tmpl ${pkgdir}/usr/share/${pkgname}/tmpl/
+    install -m644 ${startdir}/tmpl/* ${pkgdir}/usr/share/${pkgname}/tmpl/
 }
