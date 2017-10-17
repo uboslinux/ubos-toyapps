@@ -2,7 +2,7 @@ developer="http://indiecomputing.com/"
 url="http://ubos.net/"
 maintainer=$developer
 pkgname=$(basename $(pwd))
-pkgver=0.2
+pkgver=0.3
 pkgrel=1
 pkgdesc="Example blogging app from rubyonrails.org, packaged for UBOS"
 arch=('any')
@@ -12,6 +12,7 @@ depends=(
     'mariadb-clients'
     'nodejs'
     'ubos-rails-support'
+    'mod_passenger'
 )
 
 build() {
