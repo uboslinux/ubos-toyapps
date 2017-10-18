@@ -3,6 +3,7 @@
 
     "accessoryinfo" : {
         "appid"         : "wollmilchsau",
+        "accessoryid"   : "two",
         "accessorytype" : "type two"
     },
 
