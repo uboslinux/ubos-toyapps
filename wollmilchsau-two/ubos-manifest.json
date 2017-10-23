@@ -4,7 +4,10 @@
     "accessoryinfo" : {
         "appid"         : "wollmilchsau",
         "accessoryid"   : "two",
-        "accessorytype" : "type two"
+        "accessorytype" : "type two",
+        "requires" : [
++           "wollmilchsau-one"
++       ]
     },
 
     "roles" : {
