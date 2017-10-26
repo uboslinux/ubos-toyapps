@@ -6,8 +6,8 @@
         "accessoryid"   : "two",
         "accessorytype" : "type two",
         "requires" : [
-+           "wollmilchsau-one"
-+       ]
+            "wollmilchsau-one"
+        ]
     },
 
     "roles" : {
