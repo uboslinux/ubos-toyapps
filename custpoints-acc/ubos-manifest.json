@@ -1,0 +1,27 @@
+{
+    "type" : "accessory",
+
+    "accessoryinfo" : {
+        "appid"         : "wordpress"
+    },
+
+    "roles" : {
+        "apache2" : {
+            "appconfigitems" : [
+                {
+                    "type"         : "file",
+                    "name"         : "test-acc",
+                    "template"     : "test-acc.tmpl",
+                    "templatelang" : "varsubst"
+                }
+            ]
+        }
+    },
+    "customizationpoints" : {
+        "aaa" : {
+            "name"    : "aaa",
+            "type"    : "string",
+            "required" : true
+        }
+    }
+}
