@@ -111,4 +111,4 @@ def doIt(environ) :
 </html>
 """.format( environ['SCRIPT_NAME'] )
 
-  return ret
+  return [ ret.encode( 'utf-8' ) ]

@@ -20,7 +20,11 @@
 
 import gladiwashere
 
+import cgitb
+
 def application(environ, start_response):
+
+  cgitb.enable()
 
   status = '200 OK'
   response_headers = [('Content-type','text/html')]
