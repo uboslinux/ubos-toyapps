@@ -2,11 +2,11 @@ developer="http://indiecomputing.com/"
 url="http://ubos.net/"
 maintainer=$developer
 pkgname=$(basename $(pwd))
-pkgver=0.10
+pkgver=0.11
 pkgrel=1
 pkgdesc="Best Guestbook Evar, in PHP this time, using MySQL"
 arch=('any')
-license=('GPL')
+license=('AGPL3')
 options=('!strip')
 
 package() {
