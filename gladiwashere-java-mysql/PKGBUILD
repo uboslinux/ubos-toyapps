@@ -2,7 +2,7 @@ developer="http://indiecomputing.com/"
 url="http://ubos.net/"
 maintainer=${developer}
 pkgname=$(basename $(pwd))
-pkgver=0.12
+pkgver=0.13
 pkgrel=1
 pkgdesc="Best Guestbook Evar, in Java this time, using MySQL"
 _groupId='net.ubos.ubos-toyapps'
@@ -11,11 +11,12 @@ makedepends=('maven' 'jdk8-openjdk' )
 depends=('java-runtime' 'diet4j' 'mysql-connector-java')
 license=('AGPL3')
 options=('!strip')
+_java_home=/usr/lib/jvm/java-8-openjdk
 
 prepare() {
     cd ${startdir}/maven
     sed -e "s/PKGBUILD_VERSION/${pkgver}/" pom.xml.tmpl > pom.xml
-    mvn clean install ${MVN_OPTS}
+    JAVA_HOME=${_java_home} mvn clean install ${MVN_OPTS}
 }
 
 package() {
