@@ -17,8 +17,8 @@ depends=(
 
 build() {
     cd ${startdir}
-    RAILS_ENV=production bin/bundle install --deployment --without development test
-    RAILS_ENV=production bin/rails assets:precompile db:migrate
+    bundle install --path gems --deployment --without development test
+    RAILS_ENV=production bundle exec rails assets:precompile db:migrate
 }
 
 package() {
