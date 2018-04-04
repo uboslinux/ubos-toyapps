@@ -26,3 +26,4 @@ public/assets/
 
 # Ignore built package
 ruby-rails-blog-*.pkg*
+gems/
