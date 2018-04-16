@@ -2,7 +2,7 @@ developer="http://indiecomputing.com/"
 url="http://ubos.net/"
 maintainer=${developer}
 pkgname=$(basename $(pwd))
-pkgver=0.2
+pkgver=0.3
 pkgrel=1
 pkgdesc="Have a single customization point"
 arch=('any')
@@ -11,10 +11,8 @@ options=('!strip')
 
 package() {
 # Manifest
-    mkdir -p ${pkgdir}/var/lib/ubos/manifests
-    install -m0644 $startdir/ubos-manifest.json ${pkgdir}/var/lib/ubos/manifests/${pkgname}.json
+    install -D -m0644 ${startdir}/ubos-manifest.json ${pkgdir}/ubos/lib/ubos/manifests/${pkgname}.json
 
 # Template
-    mkdir -p ${pkgdir}/usr/share/${pkgname}
-    install -m0644 ${startdir}/test-acc.tmpl -t ${pkgdir}/usr/share/${pkgname}
+    install -D -m0644 ${startdir}/test-acc.tmpl -t ${pkgdir}/ubos/share/${pkgname}
 }

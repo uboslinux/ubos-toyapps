@@ -5,17 +5,17 @@
 # Copyright (C) 2017 and later, Indie Computing Corp. All rights reserved. License: see package.
 #
 
-    $db = pg_connect( "host=$dbServer dbname=$dbName user=$dbUser password=$dbPass" );
-    if( !$db ) {
-        die( 'ERROR: Cannot connect: ' . pg_last_error() );
-    }
-    if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-        pg_query_params(
-                $db,
-                "INSERT INTO Comment( name, created, email, comment ) VALUES ( \$1, NOW(), \$2, \$3 );",
-                array( $_POST['name'], $_POST['email'], $_POST['comment'] ));
-    }
-    $query = pg_query( $db, "SELECT * FROM Comment ORDER BY id DESC LIMIT 10" );
+$db = pg_connect( "host=$dbServer dbname=$dbName user=$dbUser password=$dbPass" );
+if( !$db ) {
+    die( 'ERROR: Cannot connect: ' . pg_last_error() );
+}
+if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    pg_query_params(
+            $db,
+            "INSERT INTO Comment( name, created, email, comment ) VALUES ( \$1, NOW(), \$2, \$3 );",
+            array( $_POST['name'], $_POST['email'], $_POST['comment'] ));
+}
+$query = pg_query( $db, "SELECT * FROM Comment ORDER BY id DESC LIMIT 10" );
 ?>
 <html>
  <head>

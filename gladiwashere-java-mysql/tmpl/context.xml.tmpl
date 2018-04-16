@@ -6,10 +6,11 @@
 <Context path="${appconfig.context}"
          antiResourceLocking="true"
          cookies="false"
-         docBase="/usr/lib/java/${groupId}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.war">
+         docBase="/ubos/lib/java/${groupId}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.war">
 
   <Loader className="org.diet4j.tomcat.TomcatModuleLoader"
-           rootmodule="gladiwashere-java-mysql"/>
+           rootmodule="gladiwashere-java-mysql"
+           moduledirectory="/usr/lib/java:/ubos/lib/java"/>
 
   <Resource auth="Container"
             type="javax.sql.DataSource"
