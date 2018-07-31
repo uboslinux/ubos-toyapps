@@ -1,0 +1,28 @@
+{
+    "type" : "app",
+
+    "roles" : {
+        "apache2" : {
+            "defaultcontext" : "",
+            "appconfigitems" : [
+                {
+                    "type"         : "file",
+                    "name"         : "test",
+                    "template"     : "test.tmpl",
+                    "templatelang" : "varsubst"
+                }
+            ]
+        }
+    },
+    "customizationpoints" : {
+        "aaa" : {
+            "name"     : "aaa",
+            "type"     : "string",
+            "required" : false,
+            "private"  : true,
+            "default" : {
+                "expression" : "${randomHex(40)}"
+            }
+        }
+    }
+}
