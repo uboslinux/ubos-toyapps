@@ -2,16 +2,16 @@ developer="http://indiecomputing.com/"
 url="http://ubos.net/"
 maintainer=${developer}
 pkgname=$(basename $(pwd))
-pkgver=0.17
+pkgver=0.18
 pkgrel=1
 pkgdesc="Best Guestbook Evar, in Java this time, using MySQL"
 _groupId='net.ubos.ubos-toyapps'
 arch=('any')
 makedepends=('maven' 'jdk8-openjdk' )
-depends=('java-runtime=8' 'diet4j' 'mysql-connector-java')
+depends=('java-runtime=11' 'diet4j' 'mysql-connector-java')
 license=('AGPL3')
 options=('!strip')
-_java_home=/usr/lib/jvm/java-8-openjdk
+_java_home=/usr/lib/jvm/java-11-openjdk
 
 prepare() {
     cd ${startdir}/maven
