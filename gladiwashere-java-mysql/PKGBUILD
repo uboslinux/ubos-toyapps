@@ -2,12 +2,12 @@ developer="http://indiecomputing.com/"
 url="http://ubos.net/"
 maintainer=${developer}
 pkgname=$(basename $(pwd))
-pkgver=0.18
+pkgver=0.19
 pkgrel=1
 pkgdesc="Best Guestbook Evar, in Java this time, using MySQL"
 _groupId='net.ubos.ubos-toyapps'
 arch=('any')
-makedepends=('maven' 'jdk8-openjdk' )
+makedepends=('maven' 'jdk11-openjdk' )
 depends=('java-runtime=11' 'diet4j' 'mysql-connector-java')
 license=('AGPL3')
 options=('!strip')
@@ -31,9 +31,11 @@ package() {
     install -D -m0644 ${startdir}/appicons/{72x72,144x144}.png -t ${pkgdir}/ubos/http/_appicons/${pkgname}/
     install -D -m0644 ${startdir}/appicons/license.txt         -t ${pkgdir}/ubos/http/_appicons/${pkgname}/
 
-# Code
+# Code and pom file
     install -D -m0644 ${startdir}/maven/target/${pkgname}-${pkgver}.war \
                       ${pkgdir}/ubos/lib/java/${_groupId//.//}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.war
+    install -D -m0644 ${startdir}/maven/pom.xml \
+                      ${pkgdir}/ubos/lib/java/${_groupId//.//}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.pom
 
 # Templates, with package/module names and versions replaced
     install -D -m0644 ${startdir}/tmpl/*.tmpl -t ${pkgdir}/ubos/share/${pkgname}/tmpl/
