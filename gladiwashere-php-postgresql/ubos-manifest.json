@@ -10,7 +10,7 @@
                 "php-pgsql"
             ],
             "apache2modules" : [
-                "php7"
+                "php"
             ],
             "phpmodules" : [
                 "pgsql"
