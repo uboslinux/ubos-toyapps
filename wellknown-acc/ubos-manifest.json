@@ -1,0 +1,24 @@
+{
+    "type" : "accessory",
+
+    "accessoryinfo" : {
+        "appid"         : "wellknown"
+    },
+
+    "roles" : {
+        "apache2" : {
+            "appconfigitems" : [
+                {
+                    "type"         : "tcpport",
+                    "name"         : "acc-port"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : "test-acc",
+                    "template"     : "test-acc.tmpl",
+                    "templatelang" : "varsubst"
+                }
+            ]
+        }
+    }
+}

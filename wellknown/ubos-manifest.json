@@ -1,0 +1,26 @@
+{
+    "type" : "app",
+
+    "roles" : {
+        "apache2" : {
+            "defaultcontext" : "",
+            "appconfigitems" : [
+                {
+                    "type"         : "tcpport",
+                    "name"         : "app-port"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : "test",
+                    "template"     : "test.tmpl",
+                    "templatelang" : "varsubst"
+                }
+            ],
+            "wellknown" : {
+                "webfinger" : {
+                    "proxy" : "http://127.0.0.1:${appconfig.tcpport.app-port}"
+                }
+            }
+        }
+    }
+}

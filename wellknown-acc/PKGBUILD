@@ -1,0 +1,18 @@
+developer="http://indiecomputing.com/"
+url="http://ubos.net/"
+maintainer=${developer}
+pkgname=$(basename $(pwd))
+pkgver=0.1
+pkgrel=1
+pkgdesc="Can an accessory contribute to well-known/webfinger and access the app's port"
+arch=('any')
+license=('AGPL3')
+options=('!strip')
+
+package() {
+# Manifest
+    install -D -m0644 ${startdir}/ubos-manifest.json ${pkgdir}/ubos/lib/ubos/manifests/${pkgname}.json
+
+# Template
+    install -D -m0644 ${startdir}/test-acc.tmpl -t ${pkgdir}/ubos/share/${pkgname}
+}

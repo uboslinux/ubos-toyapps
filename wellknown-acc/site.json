@@ -1,0 +1,20 @@
+{
+   "siteid" : "sf430b98b4a76456ce2d588175b37251af8d3af84",
+   "admin" : {
+      "email" : "test@ubos.net",
+      "userid" : "admin",
+      "username" : "admin",
+      "credential" : "qwerqwer"
+   },
+   "appconfigs" : [
+      {
+         "appid" : "wellknown",
+         "accessoryids" : [
+            "wellknown-acc"
+         ],
+         "context" : "",
+         "appconfigid" : "aeac9c2ed7d20c48ce4f762bee402119e58ee4aa1"
+      }
+   ],
+   "hostname" : "*"
+}
