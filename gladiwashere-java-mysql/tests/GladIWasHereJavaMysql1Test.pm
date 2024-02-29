@@ -19,7 +19,7 @@ my $TEST = new UBOS::WebAppTest(
     description => 'Tests whether anonymous guests can leave messages on the gladiwashere-java-mysql app.',
 
     packageDbsToAdd => {
-        'toyapps' => 'http://depot.ubos.net/$channel/$arch/toyapps'
+        'toyapps' => 'https://depot.ubosfiles.net/$channel/$arch/toyapps'
     },
 
     checks => [
